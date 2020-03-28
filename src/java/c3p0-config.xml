@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c3p0-config>
+    <!-- 默认配置，如果没有指定则使用这个配置 -->
+    <default-config>
+        <property name="checkoutTimeout">30000</property>
+        <property name="idleConnectionTestPeriod">30</property>
+        <property name="initialPoolSize">20</property> <!-- 连接池初始化时创建的连接数 -->
+        <property name="maxIdleTime">30</property> <!-- 连接的最大空闲时间，如果超过这个时间，某个数据库连接还没有被使用，则会断开掉这个连接如果为0，则永远不会断开连接 -->
+        <property name="maxPoolSize">20</property> <!-- 连接池中拥有的最大连接数 -->
+        <property name="minPoolSize">20</property> <!-- 连接池保持的最小连接数 -->
+        <property name="maxStatements">200</property>
+        <property name="acquireIncrement">3</property>
+    </default-config>
+
+    <named-config name="oracle">
+        <property name="jdbcUrl">jdbc:oracle:thin:@10.0.0.2:1521:orcl</property>
+        <property name="driverClass">oracle.jdbc.driver.OracleDriver</property>
+        <property name="user">test</property>
+        <property name="password">test</property>
+    </named-config>
+    <named-config name="mysql">
+        <property name="user">root</property>
+        <property name="password">123</property>
+        <property name="jdbcUrl">jdbc:mysql://192.168.0.200:3306/WechatBackgroundService</property>
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+    </named-config>
+    <named-config name="mysql-local">
+        <property name="user">root</property>
+        <property name="password">mysql12345</property>
+        <property name="jdbcUrl">jdbc:mysql://127.0.0.1:3306/WechatBackgroundService</property>
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+    </named-config>
+     <named-config name="informix">
+        <property name="user">root</property>
+        <property name="password">mysql12345</property>
+        <property name="jdbcUrl">jdbc:mysql://127.0.0.1:3306/WechatBackgroundService</property>
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+    </named-config>    
+</c3p0-config>
