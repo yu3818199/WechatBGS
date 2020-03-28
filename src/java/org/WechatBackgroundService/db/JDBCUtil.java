@@ -14,7 +14,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class JDBCUtil {
 
-    private static DataSource ds = new ComboPooledDataSource("mysql-local");
+    private static DataSource ds = new ComboPooledDataSource("informix");
 
     /**
      * 它为null表示没有事务 它不为null表示有事务 当开启事务时，需要给它赋值 当结束事务时，需要给它赋值为null

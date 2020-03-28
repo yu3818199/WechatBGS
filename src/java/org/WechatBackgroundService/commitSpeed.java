@@ -8,6 +8,7 @@ package org.WechatBackgroundService;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.WechatBackgroundService.db.JDBCUtil;
@@ -21,8 +22,7 @@ import org.springframework.web.servlet.mvc.Controller;
  */
 public class commitSpeed implements Controller {
 
-    private final String sql = "insert into speed(ip,speed,update_time,speed2) values(?,?,current_timestamp,?);";
-    //private final String sql = "insert into speed(ip,speed,update_time,speed2) values(?,?,sysdate,?)";
+    private final String sql = "insert into speed(ip,speed,update_time,speed2) values(?,?,?,?);";
 
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -42,7 +42,8 @@ public class commitSpeed implements Controller {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, ip);
             stmt.setString(2, time);
-            stmt.setInt(3, Double.valueOf(Double.valueOf(time) * 10).intValue());
+            stmt.setTimestamp(3, (new Timestamp(System.currentTimeMillis())));
+            stmt.setInt(4, Double.valueOf(Double.valueOf(time) * 10).intValue());
             System.out.print(connection.toString() + "执行语句：" + sql + ",");
             int result = stmt.executeUpdate();// 返回值代表收到影响的行数
             System.out.println(result + "行数据受影响");
