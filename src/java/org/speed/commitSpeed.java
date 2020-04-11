@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.WechatBackgroundService;
+package org.speed;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.WechatBackgroundService.db.JDBCUtil;
+import org.speed.db.JDBCUtil;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
@@ -22,7 +22,7 @@ import org.springframework.web.servlet.mvc.Controller;
  */
 public class commitSpeed implements Controller {
 
-    private final String sql = "insert into speed(ip,speed,update_time,speed2) values(?,?,?,?);";
+    private final String sql = "insert into speed(ip,speed,update_time,speed2) values(?,?,?,?)";
 
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -55,6 +55,7 @@ public class commitSpeed implements Controller {
             }
         } catch (SQLException e) {
             System.out.println("异常提醒：" + e);
+            JDBCUtil.rollbackTransaction();
         }
 
         mav.addObject("message", "提交成功" + time);

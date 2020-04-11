@@ -31,7 +31,7 @@
           p:suffix=".jsp" />
 
     <bean name="commitSpeed"
-          class="org.WechatBackgroundService.commitSpeed" />
+          class="org.speed.commitSpeed" />
     <bean name="showStatistics"
-          class="org.WechatBackgroundService.showStatistics" />
+          class="org.speed.showStatistics" />
 </beans>

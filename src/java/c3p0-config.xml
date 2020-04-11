@@ -12,20 +12,23 @@
         <property name="acquireIncrement">3</property>
     </default-config>
 
+    <!-- oracle -->
     <named-config name="oracle">
-        <property name="jdbcUrl">jdbc:oracle:thin:@10.0.0.2:1521:orcl</property>
+        <property name="jdbcUrl">jdbc:oracle:thin:@192.168.0.157:1521:orcl</property>
         <property name="driverClass">oracle.jdbc.driver.OracleDriver</property>
-        <property name="user">test</property>
-        <property name="password">test</property>
+        <property name="user">abc</property>
+        <property name="password">abc12345</property>
     </named-config>
-    <named-config name="mysql">
+    <!-- mysql -->
+    <named-config name="database">
         <property name="user">root</property>
         <property name="password">mysql12345</property>
-        <property name="jdbcUrl">jdbc:mysql://192.168.0.200:3306/WechatBackgroundService</property>
+        <property name="jdbcUrl">jdbc:mysql://127.0.0.1:3306/speed</property>
         <property name="driverClass">com.mysql.jdbc.Driver</property>
     </named-config>
-     <named-config name="informix">
-        <property name="jdbcUrl">jdbc:informix-sqli://192.168.0.200:1533/WechatBackgroundService:informixserver=ol_informix1170;user=informix;password=informix!@#AA</property>
+    <!-- informix -->
+    <named-config name="informix">
+        <property name="jdbcUrl">jdbc:informix-sqli://192.168.0.157:1533/WechatBackgroundService:informixserver=ol_informix1170;user=informix;password=informix</property>
         <property name="driverClass">com.informix.jdbc.IfxDriver</property>
     </named-config>
 </c3p0-config>

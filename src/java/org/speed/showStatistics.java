@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.WechatBackgroundService;
+package org.speed;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.WechatBackgroundService.db.JDBCUtil;
+import org.speed.db.JDBCUtil;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
@@ -49,6 +49,7 @@ public class showStatistics implements Controller {
             //System.out.println(this.toString() + JDBCUtil.getConnection().toString());
             JDBCUtil.rollbackTransaction();
         } catch (SQLException e) {
+            JDBCUtil.rollbackTransaction();
             System.out.println("异常提醒：" + e);
         }
 

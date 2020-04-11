@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.WechatBackgroundService.db;
+package org.speed.db;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.sql.DataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class JDBCUtil {
 
-    private static DataSource ds = new ComboPooledDataSource("informix");
+    private static DataSource ds = new ComboPooledDataSource("database");
 
     /**
      * 它为null表示没有事务 它不为null表示有事务 当开启事务时，需要给它赋值 当结束事务时，需要给它赋值为null
@@ -47,7 +45,8 @@ public class JDBCUtil {
         Connection con = threadConnection.get();//获取当前线程的事务连接
         //System.out.println("commitTransaction"+tl.toString());
         if (con == null) {
-            throw new SQLException("没有事务不能提交！");
+            System.out.println("没有事务不能回滚！");
+            return;
         }
         con.commit();//提交事务
         con.close();//关闭连接
@@ -62,7 +61,8 @@ public class JDBCUtil {
         Connection con = threadConnection.get();//获取当前线程的事务连接
         //System.out.println("rollbackTransaction"+tl.toString());
         if (con == null) {
-            throw new SQLException("没有事务不能回滚！");
+            System.out.println("没有事务不能回滚！");
+            return ;
         }
         con.rollback();
         con.close();
