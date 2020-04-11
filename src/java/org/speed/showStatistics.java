@@ -24,7 +24,7 @@ import org.springframework.web.servlet.mvc.Controller;
  */
 public class showStatistics implements Controller {
 
-    private final String sql = "SELECT speed2,count(*) FROM speed where speed2<10 group by speed2 order by speed2";
+    private final String sql = "SELECT speed2,count(*) FROM speed group by speed2 order by speed2";
 
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -32,27 +32,23 @@ public class showStatistics implements Controller {
         mav.addObject("message", "统计数据");
 
         List<timeResult> page_result = new ArrayList<>();
-
+        Connection connection
+                = JDBCUtil.beginTransaction();
         try {
-
-            Connection connection
-                    = JDBCUtil.beginTransaction();
             PreparedStatement pst = connection.prepareStatement(sql);
             ResultSet resultSet = pst.executeQuery();
             System.out.println(this.toString() + connection.toString());
             while (resultSet.next()) {
                 timeResult r = new timeResult();
-                r.setMessage("0." + (Integer.valueOf(resultSet.getString(1)) - 1) + "-0." + resultSet.getString(1) + "秒 共" + resultSet.getString(2) + "人");
+                r.setMessage(((double) Integer.valueOf(resultSet.getInt(1)) / 10) + "-" + ((double) (resultSet.getInt(1) + 1) / 10) + "秒 共" + resultSet.getString(2) + "人");
                 page_result.add(r);
                 System.out.println(r.getMessage());
             }
-            //System.out.println(this.toString() + JDBCUtil.getConnection().toString());
-            JDBCUtil.rollbackTransaction();
         } catch (SQLException e) {
-            JDBCUtil.rollbackTransaction();
             System.out.println("异常提醒：" + e);
         }
 
+        JDBCUtil.rollbackTransaction();
         mav.addObject("timeResult", page_result);
 
         return mav;
