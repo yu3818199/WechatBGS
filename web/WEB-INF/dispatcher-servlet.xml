@@ -21,6 +21,7 @@
             <props>
                 <prop key="commitSpeed">commitSpeed</prop>
                 <prop key="showStatistics">showStatistics</prop>
+                <prop key="showStatisticsJson">showStatisticsJson</prop>
             </props>
         </property>
     </bean>
@@ -34,4 +35,6 @@
           class="org.speed.commitSpeed" />
     <bean name="showStatistics"
           class="org.speed.showStatistics" />
+     <bean name="showStatisticsJson"
+          class="org.speed.showStatisticsJson" />
 </beans>
