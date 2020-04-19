@@ -22,7 +22,8 @@
                 <prop key="commitSpeed">commitSpeed</prop>
                 <prop key="showStatistics">showStatistics</prop>
                 <prop key="showStatisticsJson">showStatisticsJson</prop>
-                 <prop key="ip">ipAddress</prop>
+                <prop key="ip">ipAddress</prop>
+                <prop key="showData">showData</prop>
             </props>
         </property>
     </bean>
@@ -36,8 +37,11 @@
           class="org.speed.commitSpeed" />
     <bean name="showStatistics"
           class="org.speed.showStatistics" />
-     <bean name="showStatisticsJson"
+    <bean name="showStatisticsJson"
           class="org.speed.showStatisticsJson" />
-     <bean name="ipAddress"
+    <bean name="ipAddress"
           class="org.speed.ipAddress" />
+    <bean name="showData"
+          class="org.speed.showData" />
+     
 </beans>
