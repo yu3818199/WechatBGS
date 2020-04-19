@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import org.speed.db.JDBCUtil;
 
 public class updateIP {
@@ -33,7 +32,7 @@ public class updateIP {
             System.out.println("异常提醒：" + e);
             try {
                 JDBCUtil.rollbackTransaction();
-            } catch (Exception ex) {
+            } catch (SQLException ex) {
                 System.out.println(this.toString() + "rollbackTransaction error " + ex.toString());
             }
         }
