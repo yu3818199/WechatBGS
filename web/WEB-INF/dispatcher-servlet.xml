@@ -24,6 +24,7 @@
                 <prop key="showStatisticsJson">showStatisticsJson</prop>
                 <prop key="ip">ipAddress</prop>
                 <prop key="showData">showData</prop>
+                <prop key="showDataDetail">showDataDetail</prop>
             </props>
         </property>
     </bean>
@@ -43,5 +44,6 @@
           class="org.speed.ipAddress" />
     <bean name="showData"
           class="org.speed.showData" />
-     
+      <bean name="showDataDetail"
+          class="org.speed.showDataDetail" />   
 </beans>

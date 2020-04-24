@@ -13,21 +13,15 @@
         <script src="https://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="https://apps.bdimg.com/libs/jquerymobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-        <title>查看统计数据</title>
+        <title>查看${date}数据</title>
     </head>
     <body>
         <div data-role="page" id="pageone">
             <div data-role="main" class="ui-content">
-                <h2>每天点击次数</h2>
+                <h2>${date}详细数据</h2>
                 <ul data-role="listview">
-                    <c:forEach items="${timeResult}" var="result">
-                        <li><a href="showDataDetail?date=${result.date}">${result.message}</a></li>
-                        </c:forEach>
-                </ul>
-                <h2>每天访问人数</h2>
-                <ul data-role="listview">
-                    <c:forEach items="${userResult}" var="result">
-                        <li><a href="showDataDetail?date=${result.date}">${result.message}</a></li>
+                    <c:forEach items="${dataResult}" var="result">
+                        <li><a href="#">${result.message}</a></li>
                         </c:forEach>
                 </ul>
             </div>

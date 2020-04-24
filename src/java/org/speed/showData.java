@@ -31,14 +31,15 @@ public class showData implements Controller {
         Connection connection
                 = JDBCUtil.beginTransaction();
 
-        List<timeResult> page_result_time = new ArrayList<>();
+        List<showDataResult> page_result_time = new ArrayList<>();
         try {
             PreparedStatement pst = connection.prepareStatement(sql_time);
             ResultSet resultSet = pst.executeQuery();
             System.out.println(this.toString() + connection.toString());
             while (resultSet.next()) {
-                timeResult r = new timeResult();
+                showDataResult r = new showDataResult();
                 r.setMessage(resultSet.getString(1) + " 共" + resultSet.getString(2) + "次");
+                r.setDate(resultSet.getString(1));
                 page_result_time.add(r);
                 System.out.println(r.getMessage());
             }
@@ -48,14 +49,15 @@ public class showData implements Controller {
         mav.addObject("timeResult", page_result_time);
         System.out.println("次数统计结束");
 
-        List<timeResult> page_result_user = new ArrayList<>();
+        List<showDataResult> page_result_user = new ArrayList<>();
         try {
             PreparedStatement pst = connection.prepareStatement(sql_user);
             ResultSet resultSet = pst.executeQuery();
             System.out.println(this.toString() + connection.toString());
             while (resultSet.next()) {
-                timeResult r = new timeResult();
+                showDataResult r = new showDataResult();
                 r.setMessage(resultSet.getString(1) + " 共" + resultSet.getString(2) + "人");
+                r.setDate(resultSet.getString(1));
                 page_result_user.add(r);
                 System.out.println(r.getMessage());
             }
