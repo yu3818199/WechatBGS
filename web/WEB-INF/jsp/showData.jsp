@@ -17,19 +17,25 @@
     </head>
     <body>
         <div data-role="page" id="pageone">
+            <div data-role="header">
+                <h1>小程序后台访问数据</h1>
+            </div>
             <div data-role="main" class="ui-content">
                 <h2>每天点击次数</h2>
                 <ul data-role="listview">
                     <c:forEach items="${timeResult}" var="result">
-                        <li><a href="showDataDetail?date=${result.date}">${result.message}</a></li>
+                        <li><a href="showDataDetail?date=${result.date}" data-transition="slide">${result.message}</a></li>
                         </c:forEach>
                 </ul>
                 <h2>每天访问人数</h2>
                 <ul data-role="listview">
                     <c:forEach items="${userResult}" var="result">
-                        <li><a href="showDataDetail?date=${result.date}">${result.message}</a></li>
+                        <li><a href="showDataDetail?date=${result.date}" data-transition="slide">${result.message}</a></li>
                         </c:forEach>
                 </ul>
+            </div>
+            <div data-role="footer">
+                <h1> </h1>
             </div>
         </div> 
     </body>

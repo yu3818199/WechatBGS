@@ -16,14 +16,21 @@
         <title>查看${date}数据</title>
     </head>
     <body>
+
         <div data-role="page" id="pageone">
+            <div data-role="header">
+                <a href="#" class="ui-btn" data-rel="back" data-transition="slidefade">返回上一页</a>
+                <h1>${date}详细数据</h1>
+            </div>
             <div data-role="main" class="ui-content">
-                <h2>${date}详细数据</h2>
                 <ul data-role="listview">
                     <c:forEach items="${dataResult}" var="result">
-                        <li><a href="#">${result.message}</a></li>
+                        <li>${result.message}</li>
                         </c:forEach>
                 </ul>
+            </div>
+            <div data-role="footer">
+                <h1> </h1>
             </div>
         </div> 
     </body>
