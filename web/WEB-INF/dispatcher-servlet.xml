@@ -25,6 +25,7 @@
                 <prop key="ip">ipAddress</prop>
                 <prop key="showData">showData</prop>
                 <prop key="showDataDetail">showDataDetail</prop>
+                <prop key="showDataUser">showDataUser</prop>
                 <prop key="ranking">ranking</prop>
             </props>
         </property>
@@ -46,7 +47,9 @@
     <bean name="showData"
           class="org.speed.showData" />
     <bean name="showDataDetail"
-            class="org.speed.showDataDetail" />
+          class="org.speed.showDataDetail" />
+    <bean name="showDataUser"
+          class="org.speed.showDataUser" />
     <bean name="ranking"
-            class="org.speed.ranking" />   
+          class="org.speed.ranking" />   
 </beans>
