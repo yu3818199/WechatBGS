@@ -1,11 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 当日访问用户详细信息查询
  */
 package org.speed;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.speed.db.JDBCUtil;
+import org.speed.db.DBConnect;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
@@ -30,15 +27,14 @@ public class showDataUser implements Controller {
         mav.addObject("date", date);
         System.out.println("查询" + date + "数据");
 
-        Connection connection
-                = JDBCUtil.beginTransaction();
+        DBConnect db = new DBConnect();
 
         List<showDataResult> page_result = new ArrayList<>();
         try {
-            PreparedStatement pst = connection.prepareStatement(sql);
+            PreparedStatement pst = db.conn.prepareStatement(sql);
             pst.setString(1, date);
             ResultSet resultSet = pst.executeQuery();
-            System.out.println(this.toString() + connection.toString());
+            System.out.println(this.toString() + db.conn.toString());
             while (resultSet.next()) {
                 showDataResult r = new showDataResult();
                 r.setMessage(resultSet.getString(1) + "（" + resultSet.getString(2) + "）点击" + resultSet.getString(3) + "次");
@@ -51,7 +47,7 @@ public class showDataUser implements Controller {
         mav.addObject("dataResult", page_result);
         System.out.println("次数统计结束");
 
-        JDBCUtil.rollbackTransaction();
+        db.rollback();
 
         return mav;
     }

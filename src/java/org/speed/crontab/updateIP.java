@@ -1,15 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 定时任务，更新IP地址表
  */
 package org.speed.crontab;
 
-import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import org.speed.db.JDBCUtil;
+import org.speed.db.DBConnect;
 
 public class updateIP {
 
@@ -19,19 +16,17 @@ public class updateIP {
     public void execute() {
 
         System.out.println("启动任务 " + this.toString() + " " + (new Date(System.currentTimeMillis())).toLocaleString());
-
+        DBConnect db = new DBConnect();
         try {
-            Connection connection
-                    = JDBCUtil.beginTransaction();
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            System.out.print(connection.toString() + "执行语句：" + sql + ",");
+            PreparedStatement stmt = db.conn.prepareStatement(sql);
+            System.out.print(db.conn.toString() + "执行语句：" + sql + ",");
             int result = stmt.executeUpdate();// 返回值代表收到影响的行数
             System.out.println(result + "行数据受影响");
-            JDBCUtil.commitTransaction();
+            db.commit();
         } catch (SQLException e) {
             System.out.println("异常提醒：" + e);
             try {
-                JDBCUtil.rollbackTransaction();
+                db.rollback();
             } catch (SQLException ex) {
                 System.out.println(this.toString() + "rollbackTransaction error " + ex.toString());
             }

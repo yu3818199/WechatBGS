@@ -1,39 +1,31 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 输入速度，返回排名
  */
 package org.speed;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
-import org.speed.db.JDBCUtil;
+import org.speed.db.DBConnect;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-/**
- *
- * @author yu_qi
- */
 public class ranking implements Controller {
 
     private final String sql = "select a,b,concat(round((b-a)/b*100,0),'%') c from (select (SELECT count(*)+1 FROM speed WHERE speed<?) a ,count(*) b from speed) t1";
 
+    @Override
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         ModelAndView mav = new ModelAndView("ranking");
         String time = request.getParameter("time");
 
+        DBConnect db = new DBConnect();
         try {
-            Connection connection
-                    = JDBCUtil.beginTransaction();
-            PreparedStatement pst = connection.prepareStatement(sql);
+            PreparedStatement pst = db.conn.prepareStatement(sql);
             pst.setString(1, time);
             ResultSet resultSet = pst.executeQuery();
             if (!resultSet.next()) {
@@ -51,7 +43,7 @@ public class ranking implements Controller {
             mav.addObject("message", "查询失败");
         }
 
-        JDBCUtil.rollbackTransaction();
+        db.rollback();
 
         return mav;
 

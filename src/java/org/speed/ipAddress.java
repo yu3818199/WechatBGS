@@ -1,30 +1,23 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 根据IP地址，返回地址信息
  */
 package org.speed;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.speed.db.JDBCUtil;
+import org.speed.db.DBConnect;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
 
-/**
- *
- * @author yu_qi
- */
 public class ipAddress implements Controller {
 
     private final String sql = "select * from ip where ? between iphex1 and iphex2";
 
+    @Override
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         //String ip = ipToHex(request.getRemoteAddr());
@@ -32,10 +25,9 @@ public class ipAddress implements Controller {
         System.out.println("当前地址：" + ip + "(" + request.getRemoteAddr() + ")");
         ModelAndView mav = new ModelAndView("ipAddress");
 
+        DBConnect db = new DBConnect();
         try {
-            Connection connection
-                    = JDBCUtil.beginTransaction();
-            PreparedStatement pst = connection.prepareStatement(sql);
+            PreparedStatement pst = db.conn.prepareStatement(sql);
             pst.setString(1, ip);
             ResultSet resultSet = pst.executeQuery();
             if (!resultSet.next()) {
@@ -51,7 +43,7 @@ public class ipAddress implements Controller {
                     "message", "查询失败");
         }
 
-        JDBCUtil.rollbackTransaction();
+        db.rollback();
 
         return mav;
     }

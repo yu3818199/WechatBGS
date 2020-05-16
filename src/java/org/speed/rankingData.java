@@ -1,14 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  排名信息
  */
 package org.speed;
 
-/**
- *
- * @author yu
- */
 public class rankingData {
 
     private String a;
