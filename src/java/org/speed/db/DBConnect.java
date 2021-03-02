@@ -25,6 +25,7 @@ public class DBConnect {
 
     /**
      * 提交事务
+     * @throws java.sql.SQLException
      */
     public void commit() throws SQLException {
         conn.commit();//提交事务
@@ -34,6 +35,7 @@ public class DBConnect {
 
     /**
      * 回滚事务
+     * @throws java.sql.SQLException
      */
     public void rollback() throws SQLException {
         conn.rollback();
